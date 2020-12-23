@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="pragma" content="no-cache" >
+    <meta charset="UTF-8">
+    <title>bbs.com</title>
+       <link th:href="@{/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css}" rel="stylesheet" />
+
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-bottom: 15px">
+    <div class="col-md-4">
+        <a th:href="@{/admin/section/addsection/{orderId}(orderId=${mainSection})}" target="view_blank"><input type="button" value="添加" class="btn btn-primary" id="button-add"></a>
+    </div>
+</div>
+
+    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+<thead>
+      <tr>
+          <th>副板块id</th>
+          <th>副板块名</th>
+          <th>版主id</th>
+          <th>板块介绍</th>
+          <th>板块点击数</th>
+          <th>修改信息</th>
+          <th>删除</th>
+      </tr>
+</thead>
+      <tbody>
+           <tr th:each="section : ${sectionList}">
+                <td th:text="${section.getSid()}"></td>
+                 <td th:text="${section.getSname()}">姣姣爱哦</td>
+                 <td th:text="${section.getSmasterid()}">123</td>
+                 <td th:text="${section.getSprofile()}">1225732</td>
+                 <td th:text="${section.getSclickcount()}">2138572</td>
+                 <td><a href="#" th:href="@{/admin/section/update/{orderId}(orderId=${section.getSid()})}" target="view_blank">修改信息</a></td>
+                 <td><a href="#" th:name="${section.getSid()}" class="deleteid">删除</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    </div>
+    <script th:src="@{/bootstrap/jquery-1.10.2.js}"></script>
+    <script th:src="@{/bootstrap/jquery.metisMenu.js}"></script>
+    <script th:src="@{/bootstrap/dataTables/jquery.dataTables.js}"></script>
+    <script th:src="@{/bootstrap/dataTables/dataTables.bootstrap.js}"></script>
+    <script th:src="@{/bootstrap/dialog/layer.js}"></script>
+    <script th:src="@{/bootstrap/dialog.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+        $(".deleteid").on('click', function(){
+            var id = $(this).attr("name");
+            var url="/admin/section/section/delete";
+            var data={uid:id};
+            $.post(url,data,function(result){
+                if (result=="0") {
+                    dialog.error("删除失败");
+                }
+                if (result=="1") {
+                    dialog.toconfirm("删除成功");
+                }
+            },"json");
+        });
+    </script>
+    <!-- CUSTOM SCRIPTS -->
+    <script th:src="@{/bootstrap/custom.js}"></script>
+</body>
+</html>

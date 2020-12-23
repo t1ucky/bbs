@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="pragma" content="no-cache" >
+    <meta charset="UTF-8">
+    <title>bbs.com</title>
+    <link th:href="@{/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css}" rel="stylesheet" />
+
+</head>
+<body>
+<div class="container">
+    <ul class="nav nav-tabs ">
+        <li><a href="/admin/index" >用户管理</a></li>
+        <li><a href="/admin/section">板块管理</a></li>
+        <li><a href="/admin/topic" >帖子管理</a></li>
+        <li class="active"><a href="/admin/question">问答管理</a></li>
+        <li><a href="/admin/demand">需求管理</a></li>
+        <li><a href="/admin/follow">关注管理</a></li>
+        <li><a href="/admin/supermaster">管理员管理</a></li>
+        <li><a href="/admin/outlogin">退出登录</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-4">
+            <a href="/admin/question/addQuestion" target="view_window"><input type="button" value="添加" class="btn btn-primary" id="button-add"></a>
+        </div>
+    </div>
+
+
+    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+        <thead>
+        <tr>
+            <th>问答id</th>
+            <th>一级分类id</th>
+            <th>二级分类id</th>
+            <th>作者id</th>
+            <th>问答名称</th>
+            <th>问答内容</th>
+            <th>点击量</th>
+            <th>回复量</th>
+            <th>点赞量</th>
+            <th>时间</th>
+            <th>是否加精</th>
+            <th>是否置顶</th>
+            <th>是否热门</th>
+            <th>问答分数</th>
+           <!-- <th>回答好的用户id</th>-->
+            <th>管理评论</th>
+            <th>管理回复</th>
+            <th>修改信息</th>
+            <th>删除</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="question : ${questionList}">
+            <td th:text="${question.getQid()}"></td>
+            <td th:text="${question.getQmsid()}">姣姣爱哦</td>
+            <td th:text="${question.getQsid()}">123</td>
+            <td th:text="${question.getQuid()}">1225732</td>
+            <td th:text="${question.getQname()}">2138572</td>
+            <td th:text="${question.getQcontents()}">石佛寺</td>
+            <td th:text="${question.getQclickcount()}">所发生离开的复苏</td>
+            <td th:text="${question.getQreplycount()}">男</td>
+            <td th:text="${question.getQlikecount()}">111</td>
+            <td th:text="${question.getQtime()}">0</td>
+            <td th:text="${question.isQstate()}">是</td>
+            <td th:text="${question.isQtop()}">shi</td>
+            <td th:text="${question.isQhot()}">是</td>
+            <td th:text="${question.getQscore()}">是</td>
+           <!-- <td th:text="${question.getQreplybetteruid()}">1</td>-->
+            <td><a href="#" th:href="@{/admin/question/ctt/{orderId}(orderId=${question.getQid()})}" target="view_window">管理评论</a></td>
+            <td><a href="#" th:href="@{/admin/question/rtt/{orderId}(orderId=${question.getQid()})}" target="view_window">管理回复</a></td>
+            <td><a href="#" th:href="@{/admin/question/update/{orderId}(orderId=${question.getQid()})}" target="view_window">修改信息</a></td>
+            <td><a href="#" th:name="${question.getQid()}" class="deleteqid">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script th:src="@{/bootstrap/jquery-1.10.2.js}"></script>
+<script th:src="@{/bootstrap/jquery.metisMenu.js}"></script>
+<script th:src="@{/bootstrap/dataTables/jquery.dataTables.js}"></script>
+<script th:src="@{/bootstrap/dataTables/dataTables.bootstrap.js}"></script>
+<script th:src="@{/bootstrap/dialog/layer.js}"></script>
+<script th:src="@{/bootstrap/dialog.js}"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').dataTable();
+    });
+    $(".deleteqid").on('click', function(){
+        var id = $(this).attr("name");
+        var url="/admin/question/question/delete";
+        var data={qid:id};
+        $.post(url,data,function(result){
+            if (result=="0") {
+                dialog.error("删除失败");
+            }
+            if (result=="1") {
+                dialog.success("删除成功","question");
+            }
+        },"json");
+    });
+</script>
+
+<!-- CUSTOM SCRIPTS -->
+<script th:src="@{/bootstrap/custom.js}"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="pragma" content="no-cache" >
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+       <link th:href="@{/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css}" rel="stylesheet" />
+<style type="text/css">
+.loginform{
+margin:5% 25% 0 25%;
+}
+.logininput{
+height:43px;
+}
+.loginsubmit{
+width:450px;
+height:43px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <form method="POST" class="form-horizontal loginform" action="/admin/user/maddUser" >
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">用户id</label>
+        <div class="col-sm-10">
+          <input type="phone" class="form-control logininput"  name="uid" style="display:none">
+        </div>
+      </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">用户名：</label>
+    <div class="col-sm-10">
+      <input class="form-control logininput" name="uname" >
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">密码：</label>
+      <div class="col-sm-10">
+        <input type="phone" class="form-control logininput"  name="upassword">
+      </div>
+    </div>
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">生日：</label>
+        <div class="col-sm-10">
+          <input type="phone" class="form-control logininput"  name="ubirthday">
+        </div>
+      </div>
+   <div class="form-group siginrabio">
+    <div class="col-sm-10">
+	<label class="radio-inline">
+	  <input type="radio" name="sex" id="inlineRadio1" value="0">女
+	</label>
+	<label class="radio-inline">
+    	<input type="radio" name="sex" id="inlineRadio2" value="1">男
+    </label>
+	</div>
+  </div>
+    <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">电话：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control logininput" name="uphone">
+    </div>
+  </div>
+    <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">邮箱：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control logininput" name="uemail" >
+    </div>
+  </div>
+    <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">用户工作：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control logininput"  name="ujob">
+    </div>
+  </div>
+    <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">工作地点：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control logininput"  name="uworkspace">
+    </div>
+  </div>
+    <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">积分：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control logininput"  name="upoint">
+    </div>
+  </div>
+    <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit"  class="btn btn-primary loginsubmit">添加</button>
+    </div>
+  </div>
+</form>
+</div>
+    <script th:src="@{/bootstrap/jquery-1.10.2.js}"></script>
+    <script th:src="@{/bootstrap/jquery.metisMenu.js}"></script>
+    <script th:src="@{/bootstrap/dataTables/jquery.dataTables.js}"></script>
+    <script th:src="@{/bootstrap/dataTables/dataTables.bootstrap.js}"></script>
+    <script th:src="@{/bootstrap/dialog/layer.js}"></script>
+    <script th:src="@{/bootstrap/dialog.js}"></script>
+    <script th:src="@{/bootstrap/custom.js}"></script>
+</body>
+</html>
